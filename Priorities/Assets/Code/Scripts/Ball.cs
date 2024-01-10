@@ -66,4 +66,34 @@ public class Ball : MonoBehaviour
 
         rb.velocity = Vector2.ClampMagnitude(dir * power, maxPower);
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "Goal")
+        {
+            CheckWinState();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Goal")
+        {
+            CheckWinState();
+        }
+    }
+
+    private void CheckWinState()
+    {
+        if (inHole) return;
+
+        if (rb.velocity.magnitude <= maxGoalSpeed)
+        {
+            inHole = true;
+            
+            rb.velocity = Vector2.zero;
+            gameObject.SetActive(false);
+            
+            //level complete
+        }
+    }
 }
