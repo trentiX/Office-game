@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     [Header("References")] 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private LineRenderer lr;
+    [SerializeField] private GameObject goalFX;
 
     [Header("Attributes")] 
     [SerializeField] private float maxPower = 10f;
@@ -92,8 +93,9 @@ public class Ball : MonoBehaviour
             
             rb.velocity = Vector2.zero;
             gameObject.SetActive(false);
-            
-            //level complete
+
+            GameObject fx = Instantiate(goalFX, transform.position, Quaternion.identity);
+            Destroy(fx, 2f);
         }
     }
 }
