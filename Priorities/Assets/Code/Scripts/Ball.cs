@@ -21,6 +21,11 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         PlayerInput();
+
+        if (LevelManager.main.outOfStrokes && rb.velocity.magnitude <= 0.2f && !LevelManager.main.levelCompleted)
+        {
+            LevelManager.main.GameOver();
+        }
     }
 
     private bool IsReady()
@@ -62,6 +67,8 @@ public class Ball : MonoBehaviour
         {
             return;
         }
+        
+        LevelManager.main.IncreaseStroke();
 
         Vector2 dir = (Vector2)transform.position - pos;
 
@@ -96,6 +103,8 @@ public class Ball : MonoBehaviour
 
             GameObject fx = Instantiate(goalFX, transform.position, Quaternion.identity);
             Destroy(fx, 2f);
+
+            LevelManager.main.LevelComplete();
         }
     }
 }

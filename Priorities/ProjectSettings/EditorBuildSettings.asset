@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GolfMinigame.unity
+    path: Assets/Scenes/Level01.unity
     guid: 67d1fc80e34042448a6a31aff25445da
+  - enabled: 1
+    path: Assets/Scenes/Level02.unity
+    guid: 4b91af7c7dd97864098285979d74da2e
   m_configObjects: {}

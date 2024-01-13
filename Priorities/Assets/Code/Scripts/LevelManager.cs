@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
-    private static LevelManager main;
+    public static LevelManager main;
 
     [Header("References")] 
     [SerializeField] private TextMeshProUGUI strokeUI;
@@ -27,7 +28,39 @@ public class LevelManager : MonoBehaviour
         main = this;
     }
 
-    
-    
+    private void Start()
+    {
+        UpdateStrokeUI();
+    }
+
+    public void IncreaseStroke()
+    {
+        strokes++;
+        UpdateStrokeUI();
+
+        if (strokes >= maxStrokes)
+        {
+            outOfStrokes = true;
+        }
+    }
+
+    public void LevelComplete()
+    {
+        levelCompleted = true;
+
+        levelCompletedStrokeUI.text = strokes > 1 ? "You potted in " + strokes + " strokes" : "You got a hole in one!";
+        
+        levelCompleteUI.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        gameOverUI.SetActive(true);
+    }
+
+    private void UpdateStrokeUI()
+    {
+        strokeUI.text = strokes + "/" + maxStrokes;
+    }
 }
 
